@@ -1,14 +1,14 @@
 const express = require('express');
 const mysql = require('mysql2/promise'); // mysql2의 promise 버전 사용
 const app = express();
-const port = 8000;
+const port = 12345;
 const http = require("http")
 const https = require("https")
 const fs = require("fs")
 
-var privateKey = fs.readFileSync("/etc/letsencrypt/live/{hostname}/privkey.pem")
-var certificate = fs.readFileSync("/etc/letsencrypt/live/{hostname}/cert.pem")
-var ca = fs.readFileSync("/etc/letsencrypt/live/{hostname}/chain.pem")
+var privateKey = fs.readFileSync("/etc/letsencrypt/live/www.mokkitlink.store/privkey.pem")
+var certificate = fs.readFileSync("/etc/letsencrypt/live/www.mokkitlink.store/cert.pem")
+var ca = fs.readFileSync("/etc/letsencrypt/live/www.mokkitlink.store/chain.pem")
 const credentials = { key: privateKey, cert: certificate, ca: ca }
 
 app.use((req, res) => {
