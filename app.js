@@ -2,6 +2,18 @@ const express = require('express');
 const mysql = require('mysql2/promise'); // mysql2의 promise 버전 사용
 const app = express();
 const port = 8000;
+const http = require("http")
+const https = require("https")
+const fs = require("fs")
+
+var privateKey = fs.readFileSync("/etc/letsencrypt/live/{hostname}/privkey.pem")
+var certificate = fs.readFileSync("/etc/letsencrypt/live/{hostname}/cert.pem")
+var ca = fs.readFileSync("/etc/letsencrypt/live/{hostname}/chain.pem")
+const credentials = { key: privateKey, cert: certificate, ca: ca }
+
+app.use((req, res) => {
+  res.send("Hello V")
+})
 
 // MySQL 연결 설정
 const pool = mysql.createPool({
@@ -31,7 +43,12 @@ app.get('/', async (req, res) => {
   }
 });
 
+
 // 서버 시작
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
+
+
+http.createServer(app).listen(80)
+https.createServer(credentials, app).listen(443)
