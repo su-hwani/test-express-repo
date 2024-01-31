@@ -11,10 +11,6 @@ var certificate = fs.readFileSync("/etc/letsencrypt/live/www.mokkitlink.store/ce
 var ca = fs.readFileSync("/etc/letsencrypt/live/www.mokkitlink.store/chain.pem")
 const credentials = { key: privateKey, cert: certificate, ca: ca }
 
-app.use((req, res) => {
-  res.send("Hello V")
-})
-
 // MySQL 연결 설정
 const pool = mysql.createPool({
   host: 'db-lck7f.pub-cdb.ntruss.com', // MySQL 호스트
