@@ -25,7 +25,7 @@ jobs:
           node-version: 20
 
       - name: Create .env file
-        run: echo "DOCKER_IMAGE_TAG=$(date '+%Y%m%d%H%M%S')" > .env
+        run: echo "DOCKER_IMAGE_TAG=$(TZ=Asia/Seoul date '+%Y%m%d%H%M%S')" > .env
 
       - name: Build and Push Docker Image
         run: |
