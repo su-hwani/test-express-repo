@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  app:
+    image: suhwani/mynode:${{ github.sha }}
+    ports:
+      - "80:80"
