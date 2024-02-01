@@ -6,9 +6,9 @@ const http = require("http")
 const https = require("https")
 const fs = require("fs")
 
-var privateKey = fs.readFileSync("/etc/letsencrypt/live/www.mokkitlink.store/privkey.pem")
-var certificate = fs.readFileSync("/etc/letsencrypt/live/www.mokkitlink.store/cert.pem")
-var ca = fs.readFileSync("/etc/letsencrypt/live/www.mokkitlink.store/chain.pem")
+var privateKey = fs.readFileSync("/etc/letsencrypt/live/mokkitlink.store/privkey.pem")
+var certificate = fs.readFileSync("/etc/letsencrypt/live/mokkitlink.store/cert.pem")
+var ca = fs.readFileSync("/etc/letsencrypt/live/mokkitlink.store/fullchain.pem")
 const credentials = { key: privateKey, cert: certificate, ca: ca }
 
 // MySQL 연결 설정
@@ -27,7 +27,7 @@ app.get('/', async (req, res) => {
   try {
     // MySQL에서 데이터를 가져오는 SELECT 쿼리
     const [rows, fields] = await pool.execute('SELECT * FROM User');
-    
+    // console.log("credentilas", credentials)  
     // 가져온 데이터를 콘솔에 출력
     console.log('Query Result:', rows);
 
@@ -41,10 +41,5 @@ app.get('/', async (req, res) => {
 
 
 // 서버 시작
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
-});
-
-
 http.createServer(app).listen(80)
 https.createServer(credentials, app).listen(443)
