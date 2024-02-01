@@ -2,6 +2,6 @@ version: '3'
 
 services:
   app:
-    image: suhwani/mynode:${{ github.sha }}
+    image: suhwani/mynode:${DOCKER_IMAGE_TAG}
     ports:
       - "80:80"
