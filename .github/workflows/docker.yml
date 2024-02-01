@@ -26,9 +26,9 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          docker build -t your-docker-username/your-repo-name:${{ github.sha }} .
-          docker push your-docker-username/your-repo-name:${{ github.sha }}
+          docker build -t suhwani/mynode:${{ github.sha }} .
+          docker push suhwani/mynode:${{ github.sha }}
 
-      - name: Deploy with Docker Compose
-        run: |
-          docker-compose -f path/to/your/docker-compose.yml up -d
+      # - name: Deploy with Docker Compose
+      #   run: |
+      #     docker-compose -f path/to/your/docker-compose.yml up -d
