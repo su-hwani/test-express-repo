@@ -40,6 +40,7 @@ app.get('/', async (req, res) => {
 });
 
 app.listen(port,()=>{      //포트설정
+  console.log("5:27")
   console.log(`${port}번 포트에서 서버 대기중입니다!`);
 });
 // 서버 시작
