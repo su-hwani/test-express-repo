@@ -25,12 +25,13 @@ jobs:
           node-version: 20
 
       - name: Create .env file
-        run: echo "DOCKER_IMAGE_TAG=latest" > .env
+        run: echo "DOCKER_IMAGE_TAG=$(date '+%Y%m%d%H%M%S')" > .env
 
       - name: Build and Push Docker Image
         run: |
-          docker build -t suhwani/mynode:${{ github.sha }} .
-          docker push suhwani/mynode:${{ github.sha }}
+          DOCKER_IMAGE_TAG=$(cat .env | grep DOCKER_IMAGE_TAG | cut -d'=' -f2)
+          docker build -t suhwani/mynode:${DOCKER_IMAGE_TAG} .
+          docker push suhwani/mynode:${DOCKER_IMAGE_TAG}
 
   deploy:
     runs-on: ubuntu-latest
