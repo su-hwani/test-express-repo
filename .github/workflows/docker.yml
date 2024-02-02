@@ -110,10 +110,10 @@ jobs:
         with:
           node-version: 20  # 이 부분을 업데이트합니다.
       
-       - name: Deploy with Docker Compose
+      - name: Deploy with Docker Compose
         run: |
           docker-compose up -d
-          
+
 # script: |
 #   docker pull ${{ secrets.NCP_CONTAINER_REGISTRY }}/tag-name
 #   docker stop $(docker ps -a -q)
