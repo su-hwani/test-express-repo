@@ -94,20 +94,7 @@ jobs:
           password: ${{ secrets.DEV_PASSWORD }}
           port: ${{ secrets.DEV_PORT }}
           script : | 
-            # .env 파일이 없으면 생성
-            if [ ! -f .env ]; then
-              echo "DOCKER_IMAGE_TAG=latest" > .env
-            fi
-
-            # DOCKER_IMAGE_TAG 값을 .env 파일에서 읽어오기
-            DOCKER_IMAGE_TAG=$(grep DOCKER_IMAGE_TAG .env | cut -d'=' -f2)
-
-            # .env 파일에 DOCKER_IMAGE_TAG 설정
-            echo "DOCKER_IMAGE_TAG=${DOCKER_IMAGE_TAG:-latest}" > .env
-
-            # Docker 이미지 레지스트리에서 가져오기
-            echo "Pulling latest image from registry..."
-            docker pull ${{ secrets.NCP_CONTAINER_REGISTRY }}/${{ secrets.NCP_CONTAINER_REPO }}:${DOCKER_IMAGE_TAG}
+            cd test-express-repo
 
       - name: Set up Docker Compose
         run: |
