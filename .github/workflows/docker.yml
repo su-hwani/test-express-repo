@@ -93,7 +93,7 @@ jobs:
           username: ${{ secrets.DEV_USERNAME }}
           password: ${{ secrets.DEV_PASSWORD }}
           port: ${{ secrets.DEV_PORT }}
-          script: |
+          script : | 
             # .env 파일이 없으면 생성
             if [ ! -f .env ]; then
               echo "DOCKER_IMAGE_TAG=latest" > .env
@@ -108,8 +108,7 @@ jobs:
             # Docker 이미지 레지스트리에서 가져오기
             echo "Pulling latest image from registry..."
             docker pull ${{ secrets.NCP_CONTAINER_REGISTRY }}/${{ secrets.NCP_CONTAINER_REPO }}:${DOCKER_IMAGE_TAG}
-
-
+            
       - name: Set up Docker Compose
         run: |
           sudo rm /usr/local/bin/docker-compose
